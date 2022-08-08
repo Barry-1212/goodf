@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.lingnan.goodf.dao.RegistrationDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+<!--    <resultMap type="cn.edu.lingnan.goodf.entity.RegistrationEntity" id="registrationMap">-->
+<!--        <result property="numId" column="num_id"/>-->
+<!--        <result property="userName" column="user_name"/>-->
+<!--        <result property="hId" column="h_id"/>-->
+<!--        <result property="hName" column="h_name"/>-->
+<!--        <result property="dId" column="d_id"/>-->
+<!--        <result property="dName" column="d_name"/>-->
+<!--        <result property="depId" column="dep_id"/>-->
+<!--        <result property="depName" column="dep_name"/>-->
+<!--        <result property="dcId" column="dc_id"/>-->
+<!--        <result property="dcName" column="dc_name"/>-->
+<!--        <result property="time" column="time"/>-->
+<!--        <result property="paymentStatus" column="payment_status"/>-->
+<!--        <result property="visitStatus" column="visit_status"/>-->
+<!--    </resultMap>-->
+
+    <select id="searchDetailInfoByUserId" resultType="HashMap">
+        select r.num_id as NumId,
+               r.user_name as userName,
+               r.h_id as hId,
+               r.h_name as hName,
+               r.d_id as dId,
+               r.d_name as dName,
+               r.dep_id as depId,
+               r.dep_name as depName,
+               CAST(r.time as char) as time,
+               r.payment_status as paymentStatus,
+               r.visit_status as visitStatus,
+               r.user_id as userId,
+               CAST(d.start_time as char) as StartTime, CAST(d.end_time as char) as EmdTime,
+                d.dc_name as dcName
+        from registration r join doctor d on r.d_id = d.d_id
+        where r.user_id = #{userId}
+    </select>
+
+<!--    <select id="searchDetailInfoByUserId" resultType="HashMap">-->
+<!--        select r.num_id ,-->
+<!--               r.user_name ,-->
+<!--               r.h_id ,-->
+<!--               r.h_name ,-->
+<!--               r.d_id ,-->
+<!--               r.d_name ,-->
+<!--               r.dep_id ,-->
+<!--               r.dep_name ,-->
+<!--               CAST(r.time as char) as time,-->
+<!--               r.payment_status ,-->
+<!--               r.visit_status,-->
+<!--               r.user_id ,-->
+<!--               CAST(d.start_time as char) as StartTime, CAST(d.end_time as char) as EmdTime-->
+<!--        from registration r join doctor d on r.d_id = d.d_id-->
+<!--        where r.user_id = #{userId}-->
+<!--    </select>-->
+
+
+</mapper>

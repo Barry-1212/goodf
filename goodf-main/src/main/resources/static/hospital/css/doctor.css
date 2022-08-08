@@ -1,0 +1,112 @@
+.content{
+    min-height:300px;
+
+}
+
+.doctor-item {
+    display: flex;
+    padding: 20px 30px;
+    height: 126px;
+    width: 1140px;
+}
+
+.doctor-detail {
+    margin-left: 16px;
+    width: 885px;
+}
+
+.doctor-item img {
+    height: 62px;
+    width: 62px;
+}
+
+.doctor-basic1 {
+    display: flex;
+}
+
+.doctor-basic2 {
+    margin-top: 5px;
+    height: 20px;
+    line-height: 20px;
+    color: #475163;
+    font-size: 14px;
+}
+
+.doctor-evaluate {
+    margin-top: 7px;
+    display: flex;
+}
+
+.evaluate-label {
+    height: 20px;
+    font-size: 14px;
+    color: #000;
+    line-height: 20px;
+}
+
+.evaluate-text {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+    color: #ff4d52;
+    margin-left: 6px;
+}
+
+.doctorName {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+    color: #000;
+    max-width: 500px;
+    cursor: pointer;
+}
+
+.doctorGrade {
+    font-size: 14px;
+    height: 20px;
+    color: #475163;
+    line-height: 20px;
+    margin-left: 10px;
+}
+
+.doctorEducate {
+    font-size: 14px;
+    height: 20px;
+    color: #475163;
+    line-height: 20px;
+    margin-left: 10px;
+}
+
+.action-btn {
+    width: 140px;
+    height: 44px;
+    background: #055ad7;
+    line-height: 44px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    text-align: center;
+    color: #fff;
+    margin-top: 32px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+
+.doctor-special {
+    margin-top: 6px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #475163;
+    max-height: 41px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.split-line {
+    width: 1141px;
+    height: 1px;
+    background: #e4e6ef;
+    margin-left: 29px;
+}

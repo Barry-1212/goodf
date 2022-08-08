@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="renderer" content="webkit" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>好棒大夫预约挂号系统 - 找医院</title>
+    <meta name="Keywords" content="医院标题,人民医院,省医,山西人民医院,咨询, 留言, 山西医院, 寻医问药" />
+    <meta name="Description" content="医院标题位于山西省太原市，建院于1906年，是一家三级甲等综合医院。医院秉承“患者至上，员工为本”的服务理念，弘扬“仁爱、博学、严谨、卓越”的医院精神，坚持“人民医院为人民”的办院宗旨，造就了一支业务精湛、医德高尚、纪律严明、作风过硬的职工队伍，树立了社会满意、患者信赖的良好形象。先后获得全国精神文明建设先进单位、全国文明单位、全国卫生系统先进集体、全国医院文化建设先进单位等多项荣誉称号。" />
+    <meta name="robots" content="All" />
+    <noscript><meta http-equiv="refresh" content="0; url=/noscript.htm" /></noscript>
+    <!--[if lt IE 7]><meta http-equiv="refresh" content="0; url=/YouLose.htm" /><![endif]-->
+    <meta name="Author" content="miraclevision technical team,kunyi" />
+    <meta name="Copyright" content="www.miraclevision.net,铭成奇迹" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/hospital/css/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="/hospital/css/secondary.css" type="text/css" />
+    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Respond.min.js" ></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="/hospital/js/KunyiHTML5.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/hospital/js/Kunyilibrary.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/hospital/js/html5shiv.min.js"></script>
+    <script src="/hospital/js/respond.min.js"></script>
+    <![endif]-->
+    <script src="/hospital/js/jquery-1.11.3.js"></script>
+    <script src="/hospital/js/bootstrap.js"></script>
+</head>
+<body onload="Time()" >
+<script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Init.js"></script>
+<header>
+    <div class="topHidden"></div>
+    <div class="toolBase">
+        <div class="BaseMark">
+            <ul th:if="${session.user != null}">
+                <li class="first">
+                    <a  th:text="${session.user.userName}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/searchInfoByUserId(userId=${session.user.userId})}">个人中心</a>
+                </li>
+            </ul>
+            <ul th:if="${session.user == null}">
+                <li class="first">
+                    <a  href="/web/toLogin" >去登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="BaseMark logoBase">
+        <a href="Index.html">
+            <img src="/hospital/images/logo.jpg" class="load" width="227" height="160"/>
+        </a>
+    </div>
+</header>
+<section class="BaseMark">
+    <div class="bread">您所在的位置
+        <span><a th:href="@{/web/index}">首页</a>> 预约
+        </span>
+    </div>
+    <div class="baseLeft" style="text-align: center">
+        <img th:src="${doctorDetail.docPhoto}"
+             style="height: 100px; width: 100px; display: block;margin-left: 75px">
+        <div>
+            <span th:text="${doctorDetail.dName}"></span>
+        </div>
+        <div>
+            <span style="color: black;">
+                <span th:text="${doctorDetail.dcName}"></span>
+            </span>
+            <br>
+            <span class="text-dark">
+                <span th:text="${doctorDetail.depName}"></span>
+            </span>
+        </div>
+    </div>
+    <div class="baseRight">
+        <div class="title01">时间</div>
+        <div class="announce">
+            <ul>
+                <li >
+                    <input type="hidden" id="dId" th:value="${doctorDetail.dId}">
+                    <input type="hidden" id="startTime" th:value="${doctorDetail.startTime}">
+                    <span id="start"></span>
+                    <span>——</span>
+                    <input type="hidden" id="endTime" th:value="${doctorDetail.endTime}">
+                    <span id="end"></span>
+                    <input type="button" value="预约" id="yuYue" style="background-color: #00FF00">
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</section>
+
+<div class="BottomHidden"></div>
+<div id="Footer_CodeDiv">
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F4a1d36386e8734a5fd29acec9114818d' type='text/javascript'%3E%3C/script%3E"));
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fafd2ae44e23648da4e8a81a7b1349be4' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+<script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Common.js"></script>
+<script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Secondary.js"></script>
+<script>
+    // 给id=yuYue的按钮加个点击事件
+    $("#yuYue").click(function (){
+        //发起ajax请求
+        var url = "/yuYue";
+        var  dId = $("#dId").val();
+        var param ={"dId": dId};
+        $.get(url,param,function (data) {
+            if (data.code == 0){
+                console.log("data"+data);
+               location.href="/pay?numId="+data.numId;
+            }else{
+                alert(data.msg);
+            }
+        },"json");
+    });
+
+    function Time(){
+        // 上班时间
+        var startTime = $("#startTime").val();
+        console.log(startTime);
+        var start = startTime.split(" ")
+        var start1 = start[3];
+        {document.getElementById("start").innerText =  start1;}
+
+        // 下班时间
+        var endTime = $("#endTime").val();
+        console.log(endTime);
+        var end = endTime.split(" ")
+        var end1 = end[3];
+        {document.getElementById("end").innerText =  end1;}
+
+    }
+
+</script>
+
+</body>
+</html>

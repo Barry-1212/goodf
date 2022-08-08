@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>好棒大夫挂号预约系统</title>
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=/noscript.htm"/>
+    </noscript>
+    <!--[if lt IE 7]>
+    <meta http-equiv="refresh" content="0; url=/YouLose.htm"/><![endif]-->
+    <meta name="Author" content="miraclevision technical team,kunyi"/>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="/hospital/css/doctor.css" type="text/css"/>
+    <link rel="stylesheet" href="/hospital/css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="/hospital/css/index.css" type="text/css"/>
+    <!--[if lt IE 9]>
+    <script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Respond.min.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="/hospital/js/KunyiHTML5.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/hospital/js/Kunyilibrary.js"></script>
+</head>
+<body>
+<script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Init.js"></script>
+<header>
+    <div class="topHidden"></div>
+    <div class="toolBase">
+        <div class="BaseMark">
+            <ul th:if="${session.user != null}">
+                <li class="first">
+                    <a  th:text="${session.user.userName}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/searchInfoByUserId(userId=${session.user.userId})}">个人中心</a>
+                </li>
+            </ul>
+            <ul th:if="${session.user == null}">
+                <li class="first">
+                    <a  href="/web/toLogin" >去登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="BaseMark logoBase"><a href="Index.html"><img src="/hospital/images/logo.jpg" class="load" width="227"
+                                                             height="160"/></a>
+    </div>
+</header>
+<nav>
+    <div class="navBase">
+        <div class="quickMenuBase" data-type="1">
+
+            <div class="quickMenu02 animated"></div>
+            <div class="quickMenus">
+                <ul class="firstUl">
+                    <li class="first"><a href=" " target="_blank" class="firstA"><em>地区预约</em><i
+                            class="style02"></i><span></span></a>
+                        <div class="QMSub QMSubMenus">
+                            <ul id="areaUl" style="width: auto">
+                                <li th:each="area : ${indexVo.areaEntities}"><a th:href="'/web/getDoctorsByAreaId/'+${area.aId}" >[[${area.area}]]<span>进入</span></a></li>
+                            </ul>
+
+
+
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li class="first"><a href=" " class="firstA"><em>医院预约</em><i
+                            class="style02"></i><span></span></a>
+                        <div class="QMSub QMSubMenus">
+                            <ul id="hospUl" style="width: auto">
+                                <li th:each="hosp:${indexVo.hospitalEntities}"><a th:href="'/web/getDoctorsByHid/' + ${hosp.hId}"  th:title="${hosp.hName}">[[${hosp.hName}]]<span>进入</span></a></li>
+                            </ul>
+
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li class="first"><a href=" " target="_blank" class="firstA"><em>科室预约</em><i
+                            class="style02"></i><span></span></a>
+                        <div class="QMSub QMSubMenus">
+                            <ul id="classUl" style="width: auto">
+                                <li th:each="cla : ${indexVo.depclassEntities}"><a th:href="'/web/getDoctorsByDcId/' + ${cla.dcId}" th:title="${cla.dcName}">[[${cla.dcName}]]<span>进入</span></a></li>
+
+                            </ul>
+
+                        </div>
+                    </li>
+                    <li class="first"><a href=" " target="_blank" class="firstA"><em>找医院</em>
+                        <i class="style03"></i><span></span></a>
+                        <div class="QMSub QMSubMenus">
+                            <ul id="hospUl2" style="width: auto">
+                                <li th:each="area : ${indexVo.areaEntities}"><a th:href="@{/GetHospitalByAreaIdAndGetAllArea(area=${area.area})}" >[[${area.area}]]<span>进入</span></a></li>
+                            </ul>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+<section class="doctorsBase BaseMark">
+    <div class="toolsBase" style="margin-left: 350px">
+        <div class="title"><em>预约</em> <span>Expert Introduction</span></div>
+
+        <div class="clear"></div>
+    </div>
+    <div class="content" style="margin-left: 350px">
+        <br>
+        <div th:each="doctor:${indexVo.doctorEntities}">
+            <div data-v-705d0e8e="" class="doctor-item">
+                <img data-v-705d0e8e="" alt="" th:src="${doctor.docPhoto}" class="avatar">
+                <div data-v-705d0e8e="" class="doctor-detail">
+                    <div data-v-705d0e8e="" class="doctor-basic1">
+                        <div data-v-705d0e8e="" class="doctorName">
+                            [[${doctor.dName}]]
+                        </div>
+                        <div data-v-705d0e8e="" class="doctorGrade">主任医师</div>
+                        <div data-v-705d0e8e="" class="doctorEducate">教授</div>
+                    </div>
+                    <div data-v-705d0e8e="" class="doctor-basic2"><span data-v-705d0e8e="">[[${doctor.hName}]]</span> <span
+                            data-v-705d0e8e="" style="margin-left: 10px;">[[${doctor.dcName}]]</span></div>
+                    <div data-v-705d0e8e="" class="doctor-special">
+                        擅长：萎缩性胃炎、慢性胃炎、胃肠功能紊乱、反流性食管炎、胃息肉、肠息肉、克罗恩病、溃疡性结肠炎、幽门螺杆菌、腹泻、便秘、消化不良。
+                        <span data-v-705d0e8e=""><div role="tooltip" id="el-popover-5410" aria-hidden="true"
+                                                      class="el-popover el-popper special-pop"
+                                                      style="width: 884px; display: none;"><!----><div data-v-705d0e8e=""
+                                                                                                       class="pop-content"><div
+                                data-v-705d0e8e="" class="pop-fill"></div> <div data-v-705d0e8e=""
+                                                                                class="pop-label">擅长</div> <div
+                                data-v-705d0e8e="" class="pop-text">萎缩性胃炎、慢性胃炎、胃肠功能紊乱、反流性食管炎、胃息肉、肠息肉、克罗恩病、溃疡性结肠炎、幽门螺杆菌、腹泻、便秘、消化不良。</div></div> <div
+                                data-v-705d0e8e="" class="pop-hidden">
+                    收起
+                    <div data-v-705d0e8e="" class="arrow"></div></div></div></span> <!----></div>
+                    <div data-v-705d0e8e="" class="doctor-evaluate ">
+                        <div data-v-705d0e8e="" class="evaluate-label">
+                            好评数
+                            <span data-v-705d0e8e="" class="evaluate-text">
+                    1246
+                  </span></div>
+                        <div data-v-705d0e8e="" class="evaluate-label" style="margin-left: 40px;">
+                            疗效满意度
+                            <span data-v-705d0e8e="" class="evaluate-text">
+                    97%
+                  </span></div>
+                    </div>
+                </div>
+                <div data-v-705d0e8e="" class="action-btn action-btn-blue">
+                    <a style="color: white" th:href="@{/doctorWeb/toYuYue(dId=${doctor.dId})}">立即预约</a>
+                </div>
+            </div>
+            <div data-v-705d0e8e="" class="split-line"></div>
+        </div>
+
+
+    </div>
+    <div class="DFastSearch">
+        <div class="DFTitle"><label>按医生姓名首字母查找</label>
+            <button class="animated">关闭查找</button>
+        </div>
+<!--        <div class="DFContent">-->
+<!--            <div class="DListBase"></div>-->
+<!--            <div class="IndexWords">-->
+<!--                <ul>-->
+<!--                    <li data-index="0">A</li>-->
+<!--                    <li data-index="1" class="other">B</li>-->
+<!--                    <li data-index="2">C</li>-->
+<!--                    <li data-index="3" class="other">D</li>-->
+<!--                    <li data-index="4">E</li>-->
+<!--                    <li data-index="5" class="other">F</li>-->
+<!--                    <li data-index="6">G</li>-->
+<!--                    <li data-index="7" class="other">H</li>-->
+<!--                    <li data-index="8">I</li>-->
+<!--                    <li data-index="9" class="other">J</li>-->
+<!--                    <li data-index="10">K</li>-->
+<!--                    <li data-index="11" class="other">L</li>-->
+<!--                    <li data-index="12">M</li>-->
+<!--                </ul>-->
+<!--                <ul>-->
+<!--                    <li data-index="13" class="other">N</li>-->
+<!--                    <li data-index="14">O</li>-->
+<!--                    <li class="other" data-index="15">P</li>-->
+<!--                    <li data-index="16">Q</li>-->
+<!--                    <li data-index="17" class="other">R</li>-->
+<!--                    <li data-index="18">S</li>-->
+<!--                    <li data-index="19" class="other">T</li>-->
+<!--                    <li data-index="20">U</li>-->
+<!--                    <li data-index="21" class="other">V</li>-->
+<!--                    <li data-index="22">W</li>-->
+<!--                    <li data-index="23" class="other">X</li>-->
+<!--                    <li data-index="24">Y</li>-->
+<!--                    <li data-index="25" class="other">Z</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</section>
+
+
+
+<div class="BottomHidden"></div>
+<!--<div id="QRBase">-->
+<!--    <div class="BaseMark">-->
+<!--        <div class="QRBase">-->
+<!--            <div class="QRList">-->
+<!--                <ul>-->
+<!--                    <li>-->
+<!--                        <div><img src="/hospital/pic/pic_QR01.jpg" width="75" height="75"/><label>医院标题APP</label></div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div><img src="/hospital/pic/pic_QR02.jpg" width="75" height="75"/><label>健康之路APP</label></div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div><img src="/hospital/pic/pic_QR03.jpg" width="75" height="75"/><label>挂号网APP</label></div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div><img src="/hospital/pic/pic_QR04.jpg" width="75" height="75"/><label>山西省预约挂号平台Androi客户端</label></div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div><img src="/hospital/pic/pic_QR05.jpg" width="75" height="75"/><label>山西省预约挂号平台IOS客户端</label></div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div><img src="/hospital/pic/pic_QR06.jpg" width="75" height="75"/><label>山西预约挂号平台微信号</label></div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div><img src="/hospital/pic/pic_QR07.jpg" width="75" height="75"/><label>健康之路微信公众号</label></div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div><img src="/hospital/pic/pic_QR08.jpg" width="75" height="75"/><label>名医网微信公众号</label></div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <div><img src="/hospital/pic/pic_QR09.jpg" width="75" height="75"/><label>挂号网微信公众号</label></div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <div class="clear"></div>-->
+<!--            </div>-->
+<!--            <button class="QRClose animated">关闭</button>-->
+<!--            <div class="BottomHidden"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<div id="Footer_CodeDiv">
+    <script type="text/javascript" >
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F4a1d36386e8734a5fd29acec9114818d' type='text/javascript'%3E%3C/script%3E"));
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fafd2ae44e23648da4e8a81a7b1349be4' type='text/javascript'%3E%3C/script%3E"));
+        $(document).ready(function () {
+            let count1 = Math.ceil([[${#lists.size(indexVo.areaEntities)}]] / 6)
+            $("#areaUl").css("column-count", count1 + "")
+
+            let count2 = Math.ceil([[${#lists.size(indexVo.hospitalEntities)}]] / 6)
+            $("#hospUl").css("column-count", count2 + "")
+            $("#hospUl2").css("column-count", count2 + "")
+
+            let count3 = Math.ceil([[${#lists.size(indexVo.depclassEntities)}]] / 6)
+            $("#classUl").css("column-count", count3 + "")
+
+
+        })
+
+
+
+    </script>
+</div>
+<script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Common.js"></script>
+<!-- <script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Index.js"></script> -->
+</body>
+</html>

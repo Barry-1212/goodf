@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.lingnan.goodf.dao.DeparmentDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cn.edu.lingnan.goodf.entity.DeparmentEntity" id="deparmentMap">
+        <result property="depId" column="dep_id"/>
+        <result property="depName" column="dep_name"/>
+        <result property="dcId" column="dc_id"/>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="renderer" content="webkit" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>医院简介 - 医院概况 - 医院医生</title>
+    <meta name="Keywords" content="医院标题,人民医院,省医,山西人民医院,咨询, 留言, 山西医院, 寻医问药" />
+    <meta name="Description" content="医院标题前身是中华基督教内地会1904年创办的开封“福音医院”。1950年2月被正式命名为“医院标题”。1955年3月，随省政府迁址太原，至今已有108年历史。   医院位于太原市环境优美..." />
+    <meta name="robots" content="All" />
+    <noscript><meta http-equiv="refresh" content="0; url=/noscript.htm" /></noscript>
+    <!--[if lt IE 7]><meta http-equiv="refresh" content="0; url=/YouLose.htm" /><![endif]-->
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/hospital/css/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="/hospital/css/secondary.css" type="text/css" />
+    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Respond.min.js" ></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="/hospital/js/KunyiHTML5.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/hospital/js/Kunyilibrary.js"></script>
+</head>
+<header>
+    <div class="topHidden"></div>
+    <div class="toolBase">
+        <div class="BaseMark">
+            <ul th:if="${session.user != null}">
+                <li class="first">
+                    <a  th:text="${session.user.userName}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/searchInfoByUserId(userId=${session.user.userId})}">个人中心</a>
+                </li>
+            </ul>
+            <ul th:if="${session.user == null}">
+                <li class="first">
+                    <a  href="/web/toLogin" >去登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="BaseMark logoBase"><a href="Index.html"><img src="/hospital/images/logo.jpg" class="load" width="227" height="160" /></a>
+    </div>
+</header>
+<body>
+<script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Init.js" ></script>
+
+<section class="BaseMark">
+    <div class="bread">您所在的位置<span><a th:href="@{/web/index}">首页</a>><a th:href="@{/GetHospitalByHId(hId=${param.hId})}">医院概况</a> > 医生详情</span></div>
+    <div class="baseLeft">
+        <div class="title title05_2">医院概况</div>
+        <div class="newsMenu">
+            <ul>
+                <li><a title="医院简介" th:href="@{/GetHospitalByHId(hId=${param.hId})}"><em>医院简介</em></a></li>
+                <li class="first active"><a th:href="@{/GetDocInfoByHId(hId=${param.hId})}" title="医院医生"><em>医院医生</em></a></li>
+                <li><a  title="医院科室"><em>医院科室</em></a></li>
+                <li><a title="荣誉称号"><em>荣誉称号</em></a></li>
+
+            </ul>
+        </div>
+
+    </div>
+    <div class="baseRight">
+
+
+
+        <div id="DIVContent" style="display: flex;flex-wrap:wrap;" class="article intro">
+
+
+
+            <div class="col-xs-6 col-md-2" th:each="doctor:${doctor}" style="margin: 0 20px 0 20px; ">
+                <a th:href="@{/doctorWeb/detail(dId=${doctor.dId})}" class="thumbnail">
+                    <img th:src="${doctor.docPhoto}"
+                        style="height: 100px; width: 100px; display: block;">
+                    <div>
+                        <span th:text="${doctor.dName}"></span>
+                    </div>
+                    <div>
+						<span style="color: black;">科室分类
+							<span th:text="${doctor.dcName}"></span>
+						</span>
+                        <br>
+                        <span class="text-dark" > 科室名
+							<span th:text="${doctor.depName}"></span>
+						</span>
+                    </div>
+<!--                    <div class="caption" style="text-align: center;">-->
+
+<!--                        <a th:href="@{/???(dId=${doctor.dId})}" class="btn btn-primary"-->
+<!--                           style="font-size: 10px;">???</a>-->
+<!--                        <a th:href="@{/???(dId=${doctor.dId})}" onclick="return confirm('您确定要删除该记录吗？')"class="btn btn-primary"-->
+<!--                           style="font-size: 10px;">???</a>-->
+<!--                    </div>-->
+                </a>
+
+            </div>
+
+
+
+
+
+
+            </span></span>
+            <p>
+                <br />
+            </p>
+            <p style="text-align:left;text-indent:32.25pt;background:white;" align="left">
+                <span style="font-family:仿宋_GB2312;color:black;font-size:18px;"></span><span style="font-family:新宋体;color:black;font-size:14pt;"></span>
+            </p>
+            <p>
+                <br />
+            </p>
+            <p align="justify">
+                <span style="font-family:NSimSun;font-size:16px;"><strong></strong></span>
+            </p>
+            <p>
+                <br />
+            </p></div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</section>
+<div class="BottomHidden"></div>
+<div id="QRBase">
+    <div class="BaseMark">
+        <div class="QRBase">
+            <div class="QRList"><ul><li><div><img src="/hospital/pic/pic_QR01.jpg" width="75" height="75"/><label>医院标题APP</label></div></li>
+                <li><div><img src="pic/pic_QR02.jpg" width="75" height="75"/><label>健康之路APP</label></div></li>
+                <li><div><img src="pic/pic_QR03.jpg" width="75" height="75"/><label>挂号网APP</label></div></li>
+                <li><div><img src="pic/pic_QR04.jpg" width="75" height="75"/><label>山西省预约挂号平台Androi客户端</label></div></li>
+                <li><div><img src="pic/pic_QR05.jpg" width="75" height="75"/><label>山西省预约挂号平台IOS客户端</label></div></li>
+                <li><div><img src="pic/pic_QR06.jpg" width="75" height="75"/><label>山西预约挂号平台微信号</label></div></li>
+                <li><div><img src="pic/pic_QR07.jpg" width="75" height="75"/><label>健康之路微信公众号</label></div></li>
+                <li><div><img src="pic/pic_QR08.jpg" width="75" height="75"/><label>名医网微信公众号</label></div></li>
+                <li><div><img src="pic/pic_QR09.jpg" width="75" height="75"/><label>挂号网微信公众号</label></div></li></ul><div class="clear"></div>
+            </div><button class="QRClose animated">关闭</button>
+            <div class="BottomHidden"></div></div>
+    </div>
+</div>
+<div id="Footer_CodeDiv"><script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F4a1d36386e8734a5fd29acec9114818d' type='text/javascript'%3E%3C/script%3E"));
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fafd2ae44e23648da4e8a81a7b1349be4' type='text/javascript'%3E%3C/script%3E"));
+</script></div><script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Common.js"></script><script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Secondary.js"></script>
+</body>
+</html>

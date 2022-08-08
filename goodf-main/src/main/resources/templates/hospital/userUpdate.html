@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>好棒大夫预约挂号系统 - 个人用户中心</title>
+<meta name="Keywords" content="医院标题,人民医院,省医,山西人民医院,咨询, 留言, 山西医院, 寻医问药" />
+<meta name="Description" content="医院标题位于山西省太原市，建院于1906年，是一家三级甲等综合医院。医院秉承“患者至上，员工为本”的服务理念，弘扬“仁爱、博学、严谨、卓越”的医院精神，坚持“人民医院为人民”的办院宗旨，造就了一支业务精湛、医德高尚、纪律严明、作风过硬的职工队伍，树立了社会满意、患者信赖的良好形象。先后获得全国精神文明建设先进单位、全国文明单位、全国卫生系统先进集体、全国医院文化建设先进单位等多项荣誉称号。" />
+<meta name="robots" content="All" />
+<noscript><meta http-equiv="refresh" content="0; url=/noscript.htm" /></noscript>
+
+
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="/hospital/css/normalize.css" type="text/css" />
+<link rel="stylesheet" href="/hospital/css/secondary.css" type="text/css" />
+<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Respond.min.js" ></script><![endif]-->
+<script language="javascript" type="text/javascript" src="/hospital/js/KunyiHTML5.min.js"></script>
+<script language="javascript" type="text/javascript" src="/hospital/js/Kunyilibrary.js"></script>
+    <!-- CSS goes in the document HEAD or added to your external stylesheet -->
+    <style type="text/css">
+        table.yangshi td{
+            width: 650px;height: 50px;font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Init.js"></script>
+<header>
+    <div class="topHidden"></div>
+    <div class="toolBase">
+        <div class="BaseMark">
+            <ul th:if="${session.user != null}">
+                <li class="first">
+                    <a  th:text="${session.user.userName}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/searchInfoByUserId(userId=${session.user.userId})}">个人中心</a>
+                </li>
+            </ul>
+            <ul th:if="${session.user == null}">
+                <li class="first">
+                    <a  href="/web/toLogin" >去登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="BaseMark logoBase"><a href="Index.html"><img src="/hospital/images/logo.jpg" class="load" width="227" height="160" /></a>
+    </div>
+</header>
+<section class="BaseMark">
+	<div class="bread">您所在的位置<span><a th:href="@{/web/index}">首页 > <a th:href="@{/searchInfoByUserId(userId=${session.user.userId})}">个人用户中心</a></span></div>
+    <div class="baseLeft">
+    	<div class="title title05_52">预约查询</div>
+          <div class="newsMenu">       
+            <ul>
+                <li class="first"><a th:href="@{/searchInfoByUserId(userId=${session.user.userId})}" title="预约挂号列表"><em>个人预约挂号列表</em></a></li>
+                <li class="first active"><a th:href="@{/updateInfoByUserId(userId=${session.user.userId})}" title="修改个人信息"><em>修改个人信息</em></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="baseRight">
+    	<div class="title01">修改个人信息</div>
+            <div class="choose">
+                <!-- Table goes in the document BODY -->
+                <table class="yangshi" border="0">
+                    <form action="/goodf/user/update" method="post">
+                        <p style="text-align:right ; background-color: rgb(107,203,202);height: 20px;width: 1225px;" ></p>
+                        <tr>
+                            <td style="text-align:center;height: 5px" ></td>
+                            <td style="text-align:center;height: 5px"><input type="hidden" class="textBox length-middle"  id="userId" th:value="${userEntity.userId}"/></td>
+                        </tr>
+                        <tr >
+                            <td style="text-align:center;" >用户名：</td>
+                            <td><input style="border-radius: 6px" type="text" class="textBox length-middle"  id="userName" th:value="${userEntity.userName}"/></td>
+                        </tr>
+                        <tr>
+                        <td style="text-align:center;">新密码：</td>
+                        <td><input  style="border-radius: 6px"  type="password" id="password" class="textBox length-middle"  /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">确认密码：</td>
+                            <td><input  style="border-radius: 6px"  type="password" id="newConPwd" class="textBox length-middle"  /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;" >地址：</td>
+                            <td><input style="border-radius: 6px"  type="text" class="textBox length-middle"  id="address" th:value="${userEntity.address}"/></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;" >电话：</td>
+                            <td><input style="border-radius: 6px"  type="text" class="textBox length-middle"  id="tel" th:value="${userEntity.tel}"/></td>
+                        </tr>
+                        <tr><td colspan="2" style="text-align:center;"><input type="button" id="updateBtn" class="tdBtn" value="保存"/></td></tr>
+                    </form>
+                </table>
+                <div class="clear"></div>
+            </div>
+    </div>
+    <div class="clear"></div>
+</section><div class="BottomHidden"></div>
+<div id="QRBase">
+<div class="BaseMark">
+    <div class="QRBase">
+    <div class="QRList"><ul><li><div><img src="/hospital/pic/pic_QR01.jpg" width="75" height="75"/><label>医院标题APP</label></div></li>
+      <li><div><img src="pic/pic_QR02.jpg" width="75" height="75"/><label>健康之路APP</label></div></li>
+      <li><div><img src="pic/pic_QR03.jpg" width="75" height="75"/><label>挂号网APP</label></div></li>
+      <li><div><img src="pic/pic_QR04.jpg" width="75" height="75"/><label>山西省预约挂号平台Androi客户端</label></div></li>
+      <li><div><img src="pic/pic_QR05.jpg" width="75" height="75"/><label>山西省预约挂号平台IOS客户端</label></div></li>
+      <li><div><img src="pic/pic_QR06.jpg" width="75" height="75"/><label>山西预约挂号平台微信号</label></div></li>
+      <li><div><img src="pic/pic_QR07.jpg" width="75" height="75"/><label>健康之路微信公众号</label></div></li>
+      <li><div><img src="pic/pic_QR08.jpg" width="75" height="75"/><label>名医网微信公众号</label></div></li>
+      <li><div><img src="pic/pic_QR09.jpg" width="75" height="75"/><label>挂号网微信公众号</label></div></li></ul><div class="clear"></div>
+    </div><button class="QRClose animated">关闭</button>
+    <div class="BottomHidden"></div></div>
+    </div>
+</div>
+<div id="Footer_CodeDiv"><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F4a1d36386e8734a5fd29acec9114818d' type='text/javascript'%3E%3C/script%3E"));
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fafd2ae44e23648da4e8a81a7b1349be4' type='text/javascript'%3E%3C/script%3E"));
+</script></div><script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Common.js"></script><script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.Secondary.js"></script><script language="javascript" type="text/javascript" src="/hospital/js/Kunyi.DutyTime.js"></script>
+</body>
+<script src="/hospital/layui/layui.js"></script>
+<script>
+    $("#updateBtn").click(function () {
+        //获取用户数据
+        var userId = $("#userId").val();
+        var userName = $("#userName").val();
+        var password = $("#password").val();
+        var newConPwd = $("#newConPwd").val();
+        var address = $("#address").val();
+        var tel = $("#tel").val();
+        var url = "/goodf/user/update";
+        var param = {"userId": userId,"userName":userName,"password":password,"newConPwd" : newConPwd,"address":address,"tel" : tel}
+        $.post(url,param,function (data) {
+            console.log(data)
+            if(data.code==200){
+                layer.msg(data.msg);
+
+            }else{
+                layer.msg(data.msg);
+            }
+        },"json")
+    })
+</script>
+</html>
